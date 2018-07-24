@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ikit.gameboard">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".NewGameActivity"
+            android:label="@string/new_game_title"
+            android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ikit.gameboard.MainActivity"/>
+        </activity>
+
+        <activity android:name=".SearchGameActivity"
+            android:label="@string/search_game_title">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
+        <activity android:name=".AddNewLocation"
+            android:label="@string/new_location_title">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
+        <activity android:name=".NewLocationActivity"
+            android:label="@string/new_location_title">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
+
+        <activity android:name=".AddNewGameActivity"
+            android:label="@string/add_new_game_data_base_title">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NewGameActivity"/>
+        </activity>
+
+    </application>
+
+</manifest>

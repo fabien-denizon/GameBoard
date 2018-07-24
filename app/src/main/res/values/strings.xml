@@ -1,0 +1,64 @@
+<resources>
+    <!--***********************************-->
+    <!--    String pour l'activité main    -->
+    <!--***********************************-->
+    <string name="app_name">GameBoard</string>
+    <string name="search_game">Rechercher un jeu</string>
+    <string name="new_game">Ajouter un jeu</string>
+    <string name="new_location">Ajouter un lieu</string>
+
+
+    <!--***********************************-->
+    <!--  String pour l'activité NewGame   -->
+    <!--***********************************-->
+
+    <string name="new_game_title">Nouveau Jeu</string>
+    <string name="add_new_game_data_base_title">Nouveau Jeu</string>
+    <string name="new_game_name_edit_text">Entrez le nom du jeu</string>
+    <string name="new_game_nb_player_spinner">Nombre de joueur au maximum</string>
+    <string name="new_game_duration_spinner">Temps moyen de jeu</string>
+    <string name="new_game_comments_edit_text">Commentaire concernant le jeu</string>
+    <string name="new_game_already_played_check_box">Coché si déjà joué</string>
+    <string name="new_game_add_button">Ajouter</string>
+    <string name="new_game_name_empty_error">Vous devez entrer un nom de jeu non vide</string>
+    <string-array name="new_game_nb_player_populate_spinner">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10+</item>
+    </string-array>
+    <string-array name="new_game_duration_populate_spinner">
+        <item>10 min</item>
+        <item>15 min</item>
+        <item>30 min</item>
+        <item>45 min</item>
+        <item>60 min</item>
+        <item>75 min</item>
+        <item>90 min</item>
+        <item>120 min</item>
+        <item>\> 120 min</item>
+    </string-array>
+
+
+
+    <!--***********************************-->
+    <!-- String pour l'activité NewLocation-->
+    <!--***********************************-->
+    <string name="new_location_title">Nouveau Lieu</string>
+    <string name="enter_new_location_edit_text">Entrer le nom du lieu</string>
+    <string name="submit_new_location_button">Ajouter</string>
+    <string name="place_already_exist">Un lieu avec ce nom existe déjà</string>
+    <string name="add_new_place_success">Le lieu a bien été ajouté</string>
+    <string name="add_new_place_fail">Une erreur est survenue lors de l\'ajout</string>
+
+    <!--***********************************-->
+    <!-- String pour l'activité SearchGame -->
+    <!--***********************************-->
+    <string name="search_game_title">Trouver un Jeu</string>
+</resources>
