@@ -21,6 +21,8 @@
     <string name="new_game_already_played_check_box">Coché si déjà joué</string>
     <string name="new_game_add_button">Ajouter</string>
     <string name="new_game_name_empty_error">Vous devez entrer un nom de jeu non vide</string>
+    <string name="error_insert_game_data_base">Une erreur est survenue lors de l\'ajout du jeu</string>
+    <string name="new_game_type_text_view">Complexité du jeu</string>
     <string-array name="new_game_nb_player_populate_spinner">
         <item>1</item>
         <item>2</item>
@@ -31,7 +33,7 @@
         <item>7</item>
         <item>8</item>
         <item>9</item>
-        <item>10+</item>
+        <item>10 +</item>
     </string-array>
     <string-array name="new_game_duration_populate_spinner">
         <item>10 min</item>
@@ -42,7 +44,7 @@
         <item>75 min</item>
         <item>90 min</item>
         <item>120 min</item>
-        <item>\> 120 min</item>
+        <item>120 + min</item>
     </string-array>
 
 
@@ -61,4 +63,32 @@
     <!-- String pour l'activité SearchGame -->
     <!--***********************************-->
     <string name="search_game_title">Trouver un Jeu</string>
+    <string name="search_game_name_edit_text">Nom du jeu recherché</string>
+    <string name="search_game_nb_min_player_text_view">Nombre minimum de joueurs</string>
+    <string name="search_game_duration_max_text_view">Durée maximale du jeu</string>
+    <string name="search_game_new_game_text_view">Nouveau jeu</string>
+    <string name="search_game_submit_button">Rechercher</string>
+    <string-array name="search_game_nb_min_player_spinner">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10 +</item>
+    </string-array>
+    <string-array name="search_game_duration_spinner">
+        <item>10 min</item>
+        <item>15 min</item>
+        <item>30 min</item>
+        <item>45 min</item>
+        <item>60 min</item>
+        <item>75 min</item>
+        <item>90 min</item>
+        <item>120 min</item>
+        <item>120 + min</item>
+    </string-array>
 </resources>

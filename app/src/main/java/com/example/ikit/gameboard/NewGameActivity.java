@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ public class NewGameActivity extends AppCompatActivity{
         setContentView(R.layout.new_game);
         getActionBar();
         ArrayList<String> listPlaces;
+        ArrayList<String> listGameType;
         Spinner spinner = findViewById(R.id.spinner_places_new_game);
 
         dbHelper = new DbHelper(this);
@@ -40,7 +42,7 @@ public class NewGameActivity extends AppCompatActivity{
 
         /* populate the spinner with this list*/
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listPlaces);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 
             //nb player
@@ -55,6 +57,12 @@ public class NewGameActivity extends AppCompatActivity{
         adapterDuration.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         durationSpinner.setAdapter(adapterDuration);
 
+            //game type
+        Spinner typeSpinner = findViewById(R.id.new_game_type_spinner);
+        listGameType = listGameType(db);
+        ArrayAdapter<String> adapterGameType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listGameType);
+        adapterGameType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(adapterGameType);
         /* set up listener on the edit text to erase the content when first click*/
             //comment
         final EditText editTextComment = findViewById(R.id.new_game_comments_edit_text);
@@ -127,24 +135,87 @@ public class NewGameActivity extends AppCompatActivity{
         return list;
     }
 
+    public ArrayList<String> listGameType(SQLiteDatabase database){
+        ArrayList<String> list = new ArrayList<>();
+        /* set up the variable to interrogate the database */
+        String[] projection = {
+                GameBoardContract.GameBoardEntry.COLUMN_GAME_TYPE
+        };
+
+        /* retrieve all the game type we have entered */
+        Cursor cursor = database.query(
+                GameBoardContract.GameBoardEntry.TABLE_GAME_TYPE,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        /* create the arraylist to return */
+        if(cursor.getCount()>0){
+            cursor.moveToFirst();
+            do{
+                list.add(cursor.getString(cursor.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_GAME_TYPE)));
+            }
+            while(cursor.moveToNext());
+        }
+        return list;
+    }
+
     /* put all fields in variable and start the function to add the new game in the database*/
     public void addGameInDataBase(){
         String name;
         String place;
         String comment;
-        String tmp;
-        Spinner spinnerTmp;
+        String type;
         boolean played;
         int duration;
         int maxPlayer;
+        String tmp;
+        Spinner spinnerTmp;
+
         Intent intent = new Intent(this, AddNewGameActivity.class);
         EditText editText = findViewById(R.id.new_game_name_edit_text);
         name = editText.getText().toString().trim().toLowerCase();
+
         editText = findViewById(R.id.new_game_comments_edit_text);
         comment = editText.getText().toString().trim().toLowerCase();
+
         spinnerTmp = findViewById(R.id.spinner_places_new_game);
         place = spinnerTmp.getSelectedItem().toString();
+
         spinnerTmp = findViewById(R.id.new_game_duration_spinner);
         tmp = spinnerTmp.getSelectedItem().toString();
+        tmp = tmp.split(" ")[0];
+        duration = Integer.parseInt(tmp);
+
+        spinnerTmp = findViewById(R.id.new_game_nb_player_spinner);
+        tmp = spinnerTmp.getSelectedItem().toString();
+        tmp = tmp.split(" ")[0];
+        maxPlayer = Integer.parseInt(tmp);
+
+        spinnerTmp = findViewById(R.id.new_game_type_spinner);
+        type = spinnerTmp.getSelectedItem().toString();
+
+        CheckBox checkBox = findViewById(R.id.new_game_played_check_box);
+        played = checkBox.isChecked();
+
+        /* put all the data in a Bundle*/
+        Bundle extras = new Bundle();
+        extras.putString("gameName", name);
+        extras.putString("gameComment", comment);
+        extras.putString("gamePlace", place);
+        extras.putInt("gameDuration", duration);
+        extras.putInt("gameNbPlayer",maxPlayer);
+        extras.putBoolean("gamePlayed",played);
+        extras.putString("gameType", type);
+
+        /* attach the bundle to the intent */
+        intent.putExtras(extras);
+
+        /* start activity */
+        startActivity(intent);
     }
 }

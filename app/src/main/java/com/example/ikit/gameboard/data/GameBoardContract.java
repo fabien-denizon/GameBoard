@@ -7,8 +7,14 @@ public class GameBoardContract {
 
         /* name for the columns and the table gameType */
         public static final String TABLE_GAME_TYPE = "gameTypeTable";
-        public static final String COLUMN_ID_GAME_TYPE =" gameType_Id";
+        public static final String COLUMN_ID_GAME_TYPE ="gameType_Id";
         public static final String COLUMN_GAME_TYPE = "gameType";
+
+        /* data to insert in the gameType table */
+        public static final String TYPE_AMBIANCE = "ambiance";
+        public static final String TYPE_FAMILIAL = "familial";
+        public static final String TYPE_FAMILIAL_PLUS = "familial plus";
+        public static final String TYPE_EXPERT = "expert";
 
         /* name for the columns and the table Places */
         public static final String TABLE_PLACES = "placesTable";
@@ -25,7 +31,6 @@ public class GameBoardContract {
         public static final String COLUMN_ID_GAME = "games_Id";
         public static final String COLUMN_GAME_NAME = "gameName";
         public static final String COLUMN_DURATION = "duration";
-        public static final String COLUMN_NB_PLAYER_MIN = "nbPlayerMin";
         public static final String COLUMN_NB_PLAYER_MAX = "nbPlayerMax";
         public static final String COLUMN_PLAYED = "played";
         public static final String COLUMN_COMMENTS = "comments";

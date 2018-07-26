@@ -20,6 +20,8 @@ public class AddNewLocation extends AppCompatActivity {
         SQLiteDatabase db;
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.new_location);
+        getActionBar();
+
         TextView textView = findViewById(R.id.new_location_display_information_text_view);
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
