@@ -173,6 +173,7 @@ public class NewGameActivity extends AppCompatActivity{
         boolean played;
         int duration;
         int maxPlayer;
+        boolean gameToTest;
         String tmp;
         Spinner spinnerTmp;
 
@@ -202,6 +203,9 @@ public class NewGameActivity extends AppCompatActivity{
         CheckBox checkBox = findViewById(R.id.new_game_played_check_box);
         played = checkBox.isChecked();
 
+        checkBox = findViewById(R.id.new_game_to_test_check_box);
+        gameToTest = checkBox.isChecked();
+
         /* put all the data in a Bundle*/
         Bundle extras = new Bundle();
         extras.putString("gameName", name);
@@ -211,6 +215,7 @@ public class NewGameActivity extends AppCompatActivity{
         extras.putInt("gameNbPlayer",maxPlayer);
         extras.putBoolean("gamePlayed",played);
         extras.putString("gameType", type);
+        extras.putBoolean("gameToTest",gameToTest);
 
         /* attach the bundle to the intent */
         intent.putExtras(extras);

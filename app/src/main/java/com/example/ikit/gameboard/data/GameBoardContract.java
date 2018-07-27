@@ -34,6 +34,7 @@ public class GameBoardContract {
         public static final String COLUMN_NB_PLAYER_MAX = "nbPlayerMax";
         public static final String COLUMN_PLAYED = "played";
         public static final String COLUMN_COMMENTS = "comments";
+        public static final String COLUMN_WANT_TO_TEST="to_test";
 
         /* name for the columns and the table linkGamePlace */
         public static final String TABLE_LINK_GAME_PLACE = "linkGamePlace";

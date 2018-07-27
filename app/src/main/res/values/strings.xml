@@ -22,7 +22,10 @@
     <string name="new_game_add_button">Ajouter</string>
     <string name="new_game_name_empty_error">Vous devez entrer un nom de jeu non vide</string>
     <string name="error_insert_game_data_base">Une erreur est survenue lors de l\'ajout du jeu</string>
+    <string name="new_game_error_get_id_place">L\Id de la place n\a pas pu etre trouve</string>
+    <string name="new_game_error_insert_link_place">Une erreur est survenue lors de l\insertion dans la table LGP</string>
     <string name="new_game_type_text_view">Complexité du jeu</string>
+    <string name="new_game_to_test">Jeu à tester</string>
     <string-array name="new_game_nb_player_populate_spinner">
         <item>1</item>
         <item>2</item>
@@ -68,6 +71,7 @@
     <string name="search_game_duration_max_text_view">Durée maximale du jeu</string>
     <string name="search_game_new_game_text_view">Nouveau jeu</string>
     <string name="search_game_submit_button">Rechercher</string>
+    <string name="display_game_title">Informations sur le Jeu</string>
     <string-array name="search_game_nb_min_player_spinner">
         <item>1</item>
         <item>2</item>
@@ -91,4 +95,9 @@
         <item>120 min</item>
         <item>120 + min</item>
     </string-array>
+
+    <!--**************************************-->
+    <!--  String pour l'activité SearchGame   -->
+    <!--**************************************-->
+    <string name="serach_game_title">Rechecher un jeu</string>
 </resources>

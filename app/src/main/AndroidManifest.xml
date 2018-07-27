@@ -43,11 +43,22 @@
                 android:value=".MainActivity"/>
         </activity>
 
-
         <activity android:name=".AddNewGameActivity"
             android:label="@string/add_new_game_data_base_title">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NewGameActivity"/>
+        </activity>
+
+        <activity android:name=".ResultSearchGameActivity"
+            android:label="@string/serach_game_title">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SearchGameActivity"/>
+        </activity>
+
+        <activity android:name=".DisplayGameInfo"
+            android:label="@string/display_game_title">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ResultSearchGameActivity"/>
         </activity>
 
     </application>

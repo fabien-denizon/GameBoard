@@ -36,6 +36,7 @@ public class AddNewGameActivity extends AppCompatActivity{
         int duration;
         int nbPlayer;
         boolean played;
+        boolean gameToTest;
         String type;
 
         /* get the data from the bundle*/
@@ -47,10 +48,15 @@ public class AddNewGameActivity extends AppCompatActivity{
         nbPlayer = extras.getInt("gameNbPlayer");
         played = extras.getBoolean("gamePlayed");
         type = extras.getString("gameType");
+        gameToTest = extras.getBoolean("gameToTest");
         /* convert the boolean into int for the database */
         int alreadyPlayed = 0;
         if(played){
             alreadyPlayed = 1;
+        }
+        int wantToTest = 0;
+        if(gameToTest){
+            wantToTest = 1;
         }
 
         /* if there is no comment entered, set empty instead of the sentence */
@@ -64,6 +70,7 @@ public class AddNewGameActivity extends AppCompatActivity{
         contentValues.put(GameBoardContract.GameBoardEntry.COLUMN_DURATION,duration);
         contentValues.put(GameBoardContract.GameBoardEntry.COLUMN_NB_PLAYER_MAX,nbPlayer);
         contentValues.put(GameBoardContract.GameBoardEntry.COLUMN_PLAYED,alreadyPlayed);
+        contentValues.put(GameBoardContract.GameBoardEntry.COLUMN_WANT_TO_TEST,wantToTest);
 
         returnReq = db.insert(GameBoardContract.GameBoardEntry.TABLE_GAMES,
                 null,
@@ -116,23 +123,41 @@ public class AddNewGameActivity extends AppCompatActivity{
         contentValues1.put(GameBoardContract.GameBoardEntry.COLUMN_ID_GAME_REF_LGT,gameId);
         returnReq2 = db.insert(GameBoardContract.GameBoardEntry.TABLE_LINK_GAME_TYPE,null,contentValues1);
 
+        if(returnReq2 == -1){
+            /* fail */
+            Toast.makeText(this, getResources().getString(R.string.error_insert_game_data_base), Toast.LENGTH_LONG).show();
+        }
 
-        TextView textView = findViewById(R.id.temporaire);
-        if(returnReq2 != -1){
-            /*success*/
-            textView.setText("insertion réussie");
+        /* insert the game in the table link place */
+            //get the id for the place
+        String[] projection3 = {GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES};
+        String whereClause3 = ""+ GameBoardContract.GameBoardEntry.COLUMN_NAME_PLACES+" = ?";
+        String[] whereArgs3 = {place};
+        int placeId;
+        Cursor cursor3 = db.query(
+            GameBoardContract.GameBoardEntry.TABLE_PLACES,
+            projection3,
+            whereClause3,
+            whereArgs3,
+            null,
+            null,
+            null
+        );
+        if(cursor3.getCount() <1){
+            Toast.makeText(this, ""+getResources().getString(R.string.new_game_error_get_id_place),Toast.LENGTH_LONG).show();
+        }else{
+            cursor3.moveToFirst();
+            placeId = cursor3.getInt(cursor3.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES));
+            cursor3.close();
+            //insert into the table
+            long returnReq3;
+            ContentValues contentValues3 = new ContentValues();
+            contentValues3.put(GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES_REF_LGP,placeId);
+            contentValues3.put(GameBoardContract.GameBoardEntry.COLUMN_ID_GAME_REF_LGP,gameId);
+            returnReq3 = db.insert(GameBoardContract.GameBoardEntry.TABLE_LINK_GAME_PLACE,null,contentValues3);
+            if(returnReq3 == -1){
+                Toast.makeText(this, getResources().getString(R.string.new_game_error_insert_link_place),Toast.LENGTH_LONG).show();
+            }
         }
-        else{
-            /*fail */
-            textView.setText("echec insertion");
-        }
-        textView.append("\nnom : "+name);
-        textView.append("\nplace : "+place);
-        textView.append("\ncomment : "+comment);
-        textView.append("\nduration : "+duration);
-        textView.append("\nnbPlayer : "+nbPlayer);
-        textView.append("\nplayed : "+played);
-        textView.append("\ngameId : "+gameId);
-        textView.append("\ngameTypeId : "+gameTypeId);
     }
 }

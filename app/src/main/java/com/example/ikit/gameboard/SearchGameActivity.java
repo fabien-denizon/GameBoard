@@ -1,5 +1,6 @@
 package com.example.ikit.gameboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -56,12 +57,13 @@ public class SearchGameActivity extends AppCompatActivity {
 
     /* check if at least one field has been completed, then start the activity to search */
     public void startSearchActivity(){
+        Intent intent = new Intent(this, ResultSearchGameActivity.class);
         boolean oneFiledCompleted = false;
         /* field to check */
             //game name
             //game type
             //duration
             //min player
-
+        startActivity(intent);
     }
 }

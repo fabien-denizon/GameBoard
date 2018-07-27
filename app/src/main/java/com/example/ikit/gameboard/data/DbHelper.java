@@ -38,6 +38,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 + GameBoardContract.GameBoardEntry.COLUMN_DURATION+" INTEGER NOT NULL, "
                 + GameBoardContract.GameBoardEntry.COLUMN_NB_PLAYER_MAX+" INTEGER NOT NULL, "
                 + GameBoardContract.GameBoardEntry.COLUMN_PLAYED+" INTEGER NOT NULL DEFAULT 0, "
+                + GameBoardContract.GameBoardEntry.COLUMN_WANT_TO_TEST+" INTEGER DEFAULT 0, "
                 + GameBoardContract.GameBoardEntry.COLUMN_COMMENTS+" TEXT );";
 
         /* make the link between the table game and place */
