@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/search_game_temporaire"/>
+        android:id="@+id/search_game_informations_text_view"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/result_search_game_recycler_view"
         android:scrollbars="vertical"

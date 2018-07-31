@@ -71,7 +71,11 @@
     <string name="search_game_duration_max_text_view">Durée maximale du jeu</string>
     <string name="search_game_new_game_text_view">Nouveau jeu</string>
     <string name="search_game_submit_button">Rechercher</string>
-    <string name="display_game_title">Informations sur le Jeu</string>
+    <string name="search_game_want_to_test">Jeu à tester</string>
+    <string name="search_game_type">Type du jeu à chercher</string>
+    <string name="search_game_one_field_needed">Veuillez remplir au moins un champ</string>
+    <string name="search_game_no_result_with_type">Aucun résultat n\'a été trouvé avec le type demandé</string>
+    <string name="search_game_no_result_with_other_type">Aucun résultat n\'a été trouvé</string>
     <string-array name="search_game_nb_min_player_spinner">
         <item>1</item>
         <item>2</item>
@@ -95,9 +99,9 @@
         <item>120 min</item>
         <item>120 + min</item>
     </string-array>
-
-    <!--**************************************-->
-    <!--  String pour l'activité SearchGame   -->
-    <!--**************************************-->
-    <string name="serach_game_title">Rechecher un jeu</string>
+    <!--************************************-->
+    <!-- String pour l'activité DisplayInfo -->
+    <!--************************************-->
+    <string name="display_info_title">Informations Jeux</string>
+    <string name="display_info_modifiy_data_button">Modifier</string>
 </resources>

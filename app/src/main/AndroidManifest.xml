@@ -50,13 +50,13 @@
         </activity>
 
         <activity android:name=".ResultSearchGameActivity"
-            android:label="@string/serach_game_title">
+            android:label="@string/search_game_title">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SearchGameActivity"/>
         </activity>
 
         <activity android:name=".DisplayGameInfo"
-            android:label="@string/display_game_title">
+            android:label="@string/display_info_title">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ResultSearchGameActivity"/>
         </activity>
