@@ -41,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 startNewLocation();
             }
         });
+
+        textView = findViewById(R.id.main_import_export_database);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startImportExport();
+            }
+        });
     }
 
     public void startNewGame(){
@@ -59,5 +67,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NewLocationActivity.class);
         startActivity(intent);
 
+    }
+
+    public void startImportExport(){
+        Intent intent = new Intent(this, ImportExportActivity.class);
+        startActivity(intent);
     }
 }

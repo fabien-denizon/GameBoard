@@ -58,9 +58,27 @@
         <activity android:name=".DisplayGameInfo"
             android:label="@string/display_info_title">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ResultSearchGameActivity"/>
+                android:value=".SearchGameActivity"/>
         </activity>
 
+
+        <activity android:name=".ImportExportActivity"
+            android:label="@string/import_export_title">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
+        <activity android:name=".deleteGameActivity"
+            android:label="@string/delete_game_title">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SearchGameActivity"/>
+        </activity>
+
+        <activity android:name=".ModifyGameActivity"
+            android:label="@string/modify_data_title">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SearchGameActivity"/>
+        </activity>
     </application>
 
 </manifest>

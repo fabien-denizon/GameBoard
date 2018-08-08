@@ -6,6 +6,7 @@
     <string name="search_game">Rechercher un jeu</string>
     <string name="new_game">Ajouter un jeu</string>
     <string name="new_location">Ajouter un lieu</string>
+    <string name="import_export_database">Importer ou Exporter les jeux</string>
 
 
     <!--***********************************-->
@@ -47,7 +48,7 @@
         <item>75 min</item>
         <item>90 min</item>
         <item>120 min</item>
-        <item>120 + min</item>
+        <item>180 min</item>
     </string-array>
 
 
@@ -97,11 +98,39 @@
         <item>75 min</item>
         <item>90 min</item>
         <item>120 min</item>
-        <item>120 + min</item>
+        <item>180 min</item>
     </string-array>
     <!--************************************-->
     <!-- String pour l'activité DisplayInfo -->
     <!--************************************-->
     <string name="display_info_title">Informations Jeux</string>
-    <string name="display_info_modifiy_data_button">Modifier</string>
+    <string name="display_info_modify_data_button">Modifier</string>
+    <string name="display_info_played_text_view">Vous avez déjà joué au jeu : </string>
+    <string name="display_info_want_to_test_text_view">Ce jeu fait parti des jeux à tester : </string>
+    <string name="display_info_error_search_database">Une erreur est surveune.</string>
+    <string name="display_info_error_search_game_type_lgt">Une erreur est survenue lors de la recherche du game_type dans la table lgt</string>
+    <string name="display_info_error_search_name_type">Une erreur est survenue lors de la cherche du type trouvé lors de la requete précédente</string>
+    <string name="display_info_type_game">Le type du jeu est </string>
+    <string name="display_info_duration">Durée moyenne </string>
+    <string name="display_info_max_player">Nom maximum de joueurs </string>
+    <string name="display_info_modify_plus_button">Modifier plus</string>
+    <string name="display_info_delete_button">Supprimer</string>
+    <string name="display_info_allow_modification">Cliquez pour modifier des valeurs</string>
+
+    <!--*******************************************-->
+    <!-- String pour l'activité ModifyGameActivity -->
+    <!--*******************************************-->
+    <string name="modify_data_title">Mise à jour des informations</string>
+    <string name="modify_data_error_updating_data">Une erreur est survenue lors de la mise à jour du jeu</string>
+    <string name="modify_data_success">La modification a bien été prise en compte</string>
+
+    <!--***********************************-->
+    <!-- String pour l'activité deleteGame -->
+    <!--***********************************-->
+    <string name="delete_game_title">Supprimer le jeu</string>
+
+    <!--****************************************-->
+    <!--  String pour l'activité ImportExport   -->
+    <!--****************************************-->
+    <string name="import_export_title">Importer/Exporter</string>
 </resources>
