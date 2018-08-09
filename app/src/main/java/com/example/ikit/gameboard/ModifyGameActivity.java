@@ -52,14 +52,6 @@ public class ModifyGameActivity extends AppCompatActivity{
         idGameType = findIdGameType(gameType, db);
 
         TextView textView = findViewById(R.id.modify_data_display_information_text_view);
-        textView.append("gameName "+gameName
-        +"\ncomment "+comment
-        +"\nidGame "+idGame
-        +"\nnbPlayer "+nbPlayer
-        +"\ngameType "+gameType
-        +"\nduration "+duration
-        +"\nplayed "+played
-        +"\nwantToTest "+wantToTest);
         /* if we found the game type of the game we can continue*/
         if(idGameType >= 0){
             int returnUpdate;
@@ -79,7 +71,6 @@ public class ModifyGameActivity extends AppCompatActivity{
                     cv,
                     whereClause,
                     whereArgs);
-            textView.append("\nNombre de lignes mises à jour "+returnUpdate);
             if(returnUpdate > 0){
                 /* if we manage to update the table game now udpate the table linkGameType */
                 cv.clear();

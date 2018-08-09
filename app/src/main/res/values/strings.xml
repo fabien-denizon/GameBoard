@@ -116,6 +116,13 @@
     <string name="display_info_modify_plus_button">Modifier plus</string>
     <string name="display_info_delete_button">Supprimer</string>
     <string name="display_info_allow_modification">Cliquez pour modifier des valeurs</string>
+    <string name="display_info_where_to_find_results">Le jeu se trouve aux lieux </string>
+    <string name="display_info_where_to_find_no_result">Aucun lieu n\'a été trouvé pour ce jeu</string>
+    <string name="display_info_add_place_text_view">Lieu à ajouter</string>
+    <string name="display_info_add_place_button">Ajouter un lieu</string>
+    <string name="display_info_place_already_has_game_toast">Ce lieu est déjà enregistré pour ce jeu</string>
+    <string name="display_info_place_added_toast">Ce lieu a bien été ajouté</string>
+    <string name="display_info_error_place_added_toast">Une erreur est survenue lors de l\'ajout du lieu</string>
 
     <!--*******************************************-->
     <!-- String pour l'activité ModifyGameActivity -->
@@ -128,6 +135,11 @@
     <!-- String pour l'activité deleteGame -->
     <!--***********************************-->
     <string name="delete_game_title">Supprimer le jeu</string>
+    <string name="delete_game_ask_confirmation_text_view">Voulez vous vraiment supprimer le jeu </string>
+    <string name="delete_game_yes_delete_button">Oui</string>
+    <string name="delete_game_no_delete_button">Non</string>
+    <string name="delete_game_error_delete_game">Une erreur est survenue lors de la suppression du jeu</string>
+    <string name="delete_game_success_delete_game">Le jeu a bien été supprimé</string>
 
     <!--****************************************-->
     <!--  String pour l'activité ImportExport   -->

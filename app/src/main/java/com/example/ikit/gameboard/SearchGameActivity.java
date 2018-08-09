@@ -91,6 +91,7 @@ public class SearchGameActivity extends AppCompatActivity {
         Spinner spinnerTmp;
         String tmp;
         CheckBox checkBox;
+
         boolean oneFiledCompleted = false;
 
         /* field to check */
@@ -141,6 +142,14 @@ public class SearchGameActivity extends AppCompatActivity {
             oneFiledCompleted = true;
         }
 
+            //game we did not play
+        boolean newGame;
+        checkBox = findViewById(R.id.search_game_new_game_check_box);
+        newGame = checkBox.isChecked();
+        if(newGame){
+            oneFiledCompleted = true;
+        }
+
         //if the user has completed at least 1 field, we search the games
         if(oneFiledCompleted){
             //build the Bundle before starting the intent
@@ -150,6 +159,7 @@ public class SearchGameActivity extends AppCompatActivity {
             extras.putInt("gameDuration", gameDuration);
             extras.putInt("minPlayer", minPlayer);
             extras.putBoolean("gameToTest",gameToTest);
+            extras.putBoolean("newGame", newGame);
             intent.putExtras(extras);
 
             startActivity(intent);

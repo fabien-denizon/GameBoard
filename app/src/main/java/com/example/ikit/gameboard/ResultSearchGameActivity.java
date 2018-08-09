@@ -17,10 +17,10 @@ import com.example.ikit.gameboard.data.GameBoardContract;
 
 import java.util.ArrayList;
 
-public class ResultSearchGameActivity extends AppCompatActivity implements recyclerViewAdapterCustom.ItemClickListener{
+public class ResultSearchGameActivity extends AppCompatActivity implements RecyclerViewAdapterCustom.ItemClickListener{
     private DbHelper dbHelper;
     private RecyclerView recyclerView;
-    private recyclerViewAdapterCustom recyclerViewAdapter;
+    private RecyclerViewAdapterCustom recyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -36,18 +36,25 @@ public class ResultSearchGameActivity extends AppCompatActivity implements recyc
         int minPlayer;
         boolean toTest;
         int gameToTest;
+        boolean newGameToPlay;
+        int newGame;
         name = getIntent().getExtras().getString("gameName");
         type = getIntent().getExtras().getString("gameType");
         maxDuration = getIntent().getExtras().getInt("gameDuration");
         minPlayer = getIntent().getExtras().getInt("minPlayer");
         toTest = getIntent().getExtras().getBoolean("gameToTest");
+        newGameToPlay = getIntent().getExtras().getBoolean("newGame");
         /* convert the boolean into int */
         if(toTest){
             gameToTest = 1;
         }else{
             gameToTest = 0;
         }
-
+        if(newGameToPlay){
+            newGame = 1;
+        }else{
+            newGame = 0;
+        }
         /* initiate recycler view*/
         ArrayList<String> listGameName = new ArrayList<>();
         recyclerView = findViewById(R.id.result_search_game_recycler_view);
@@ -145,6 +152,14 @@ public class ResultSearchGameActivity extends AppCompatActivity implements recyc
                     andNeeded = true;
                     whereArgsList.add(Integer.toString(gameToTest));
                 }
+                if(newGame == 1){
+                    if(andNeeded){
+                        whereClause += " AND ";
+                    }
+                    whereClause += GameBoardContract.GameBoardEntry.COLUMN_PLAYED+" = ?";
+                    andNeeded = true;
+                    whereArgsList.add("0");
+                }
 
                 if(maxDuration > 0){
                     if(andNeeded){
@@ -171,8 +186,6 @@ public class ResultSearchGameActivity extends AppCompatActivity implements recyc
                     do{
                         idGame = cursor.getInt(cursor.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_ID_GAME));
                         gameName = cursor.getString(cursor.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_GAME_NAME));
-                        textViewInformation.append("\nID GAME :"+idGame);
-                        textViewInformation.append("\nGAME NAME :"+gameName);
                         listId.add(Integer.toString(idGame));
                         listGameName.add(gameName);
                     }while (cursor.moveToNext());
@@ -186,7 +199,7 @@ public class ResultSearchGameActivity extends AppCompatActivity implements recyc
                             }
                         }
                     }
-                    recyclerViewAdapter = new recyclerViewAdapterCustom(this, listGameName);
+                    recyclerViewAdapter = new RecyclerViewAdapterCustom(this, listGameName);
                     recyclerViewAdapter.setClickListener(this);
                     recyclerView.setAdapter(recyclerViewAdapter);
                     DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL);

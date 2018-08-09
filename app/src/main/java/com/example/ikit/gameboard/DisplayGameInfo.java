@@ -1,7 +1,9 @@
 package com.example.ikit.gameboard;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,7 @@ public class DisplayGameInfo extends AppCompatActivity {
     private int idGame;
     private String gameType;
     private boolean allowModification = true;
+    private ArrayList<String> listPlaces;
 
     @Override
     public void onCreate(Bundle SavedInstanceState){
@@ -40,7 +43,9 @@ public class DisplayGameInfo extends AppCompatActivity {
         gameName = getIntent().getExtras().getString("gameName");
 
         dbHelper = new DbHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        final SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        listPlaces = new ArrayList<>();
 
         /* search all information about the game */
         getDataGame(db);
@@ -48,7 +53,7 @@ public class DisplayGameInfo extends AppCompatActivity {
         /* disable fields  */
         allowModification();
 
-        /* set up listener to allow to change only with long click */
+        /* set up all the fields*/
             //the name of the game
         EditText editTextGameName = findViewById(R.id.display_game_info_game_name_edit_text);
         editTextGameName.setText(gameName);
@@ -59,11 +64,25 @@ public class DisplayGameInfo extends AppCompatActivity {
             //game type  textViewGameType.setText(getResources().getString(R.string.display_info_type_game)+gameType);
         setUpSpinnerGameType(db);
 
+            //the places
+        TextView textViewPlaces = findViewById(R.id.display_game_info_where_to_find_text_view);
+        if(listPlaces.size()>0){
+            textViewPlaces.setText(getResources().getString(R.string.display_info_where_to_find_results));
+            for(int i=0; i < listPlaces.size(); i++){
+                textViewPlaces.append("\n"+listPlaces.get(i));
+            }
+        }else{
+            textViewPlaces.setText(getResources().getString(R.string.display_info_where_to_find_no_result));
+        }
+
             //duration
        setUpSpinnerGameDuration();
 
             //max player
         setUpSpinnerMaxPlayer();
+
+            //new place
+        setUpSpinnerNewPlace(db);
 
             //ever played
         CheckBox checkBoxPlayed = findViewById(R.id.display_game_info_game_played_check_box);
@@ -96,6 +115,14 @@ public class DisplayGameInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 deleteGame();
+            }
+        });
+
+        Button buttonAddPlace = findViewById(R.id.display_game_info_add_place);
+        buttonAddPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addPlace(db);
             }
         });
 
@@ -175,6 +202,9 @@ public class DisplayGameInfo extends AppCompatActivity {
                         cursorType.moveToFirst();
                         gameType = cursorType.getString(cursorType.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_GAME_TYPE));
                         cursorType.close();
+
+                        //make the list where to find the game
+                        listPlaces = listGamePlaces(database);
                     }
                     else{
                         textView.append("\n"+R.string.display_info_error_search_name_type);
@@ -193,11 +223,32 @@ public class DisplayGameInfo extends AppCompatActivity {
     }
 
     public void deleteGame(){
-        Intent intent = new Intent(this, deleteGameActivity.class);
+        Intent intent = new Intent(this, DeleteGameActivity.class);
         Bundle extras = new Bundle();
         extras.putInt("gameId",idGame);
+        extras.putString("gameName", gameName);
         intent.putExtras(extras);
         startActivity(intent);
+    }
+
+    /* set up the spinner if we want to add a place where to find the game */
+    public void setUpSpinnerNewPlace(SQLiteDatabase database){
+        Spinner spinnerNewPlace = findViewById(R.id.display_game_info_add_place_spinner);
+        ArrayList<String> listPlaces = new ArrayList<>();
+        String[] projection = {GameBoardContract.GameBoardEntry.COLUMN_NAME_PLACES};
+        Cursor cursor = database.query(GameBoardContract.GameBoardEntry.TABLE_PLACES,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null);
+        cursor.moveToFirst();
+        do{
+            listPlaces.add(cursor.getString(cursor.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_NAME_PLACES)));
+        }while (cursor.moveToNext());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listPlaces);
+        spinnerNewPlace.setAdapter(adapter);
     }
 
     /* build a list with the duration of the game as first item */
@@ -263,6 +314,54 @@ public class DisplayGameInfo extends AppCompatActivity {
         return list;
     }
 
+    public ArrayList<String> listGamePlaces(SQLiteDatabase db) {
+        ArrayList<String> listId = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
+
+        /* get the id of the places where we can find the game */
+        String[] projectionId = {GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES_REF_LGP};
+        String whereClauseId = ""+ GameBoardContract.GameBoardEntry.COLUMN_ID_GAME_REF_LGP+" = ?";
+        String[] whereArgsId = {Integer.toString(idGame)};
+        Cursor cursorId = db.query(GameBoardContract.GameBoardEntry.TABLE_LINK_GAME_PLACE,
+                projectionId,
+                whereClauseId,
+                whereArgsId,
+                null,
+                null,
+                null);
+
+        if(cursorId.getCount() > 0){
+            cursorId.moveToFirst();
+            do{
+                listId.add(cursorId.getString(cursorId.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES_REF_LGP)));
+            }while(cursorId.moveToNext());
+            cursorId.close();
+            String query;
+            Cursor cursorName;
+            /* for each id, get the name of the places corresponding to those id*/
+
+            for(int i = 0; i < listId.size(); i++){
+                /* build the query */
+                query = "SELECT "+ GameBoardContract.GameBoardEntry.COLUMN_NAME_PLACES
+                        +" FROM "
+                        + GameBoardContract.GameBoardEntry.TABLE_PLACES
+                        +" WHERE "
+                        + GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES
+                        +" = '"
+                        +listId.get(i)
+                        +"'";
+                cursorName = db.rawQuery(query,null);
+                if(cursorName.getCount()>0){
+                    cursorName.moveToFirst();
+                    list.add(
+                            cursorName.getString(cursorName.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_NAME_PLACES))
+                    );
+                }
+            }
+        }
+        return list;
+    }
+
     /* build a list with nb of player as first item */
     public void setUpSpinnerMaxPlayer(){
         String substring;
@@ -281,7 +380,7 @@ public class DisplayGameInfo extends AppCompatActivity {
         spinner.setAdapter(arrayAdapter);
     }
 
-    //make all the field available/disable to modifications
+    /* make all the field available/disable to modifications */
     public void allowModification(){
         EditText editTextName = findViewById(R.id.display_game_info_game_name_edit_text);
         Spinner spinnerGameType = findViewById(R.id.display_game_info_game_type_spinner);
@@ -369,5 +468,62 @@ public class DisplayGameInfo extends AppCompatActivity {
 
         intent.putExtras(extras);
         startActivity(intent);
+    }
+
+    /* add the place to the game */
+    public void addPlace(SQLiteDatabase database){
+        TextView textView = findViewById(R.id.display_game_info_where_to_find_text_view);
+        /* check if the place already has the game */
+        Spinner spinner = findViewById(R.id.display_game_info_add_place_spinner);
+        String place = spinner.getSelectedItem().toString();
+
+            //get the id of the place
+        String[] projectionIdPlace = {GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES};
+        String whereClauseIdPlace = ""+ GameBoardContract.GameBoardEntry.COLUMN_NAME_PLACES+" = ?";
+        String[] whereArgsIdPlace = {place};
+        Cursor cursorIdPlace = database.query(GameBoardContract.GameBoardEntry.TABLE_PLACES,
+                projectionIdPlace,
+                whereClauseIdPlace,
+                whereArgsIdPlace,
+                null,
+                null,
+                null);
+        cursorIdPlace.moveToFirst();
+        int idPlace = cursorIdPlace.getInt(cursorIdPlace.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES));
+        cursorIdPlace.close();
+            //check if there is the game with the place in the LGP
+        String whereClauseIdRefPlace = ""+ GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES_REF_LGP+" = ?"
+                                    +" AND "
+                                    + GameBoardContract.GameBoardEntry.COLUMN_ID_GAME_REF_LGP+" = ?";
+        String[] whereArgsIdRefPlace = {Integer.toString(idPlace), Integer.toString(idGame)};
+        long returnReq = DatabaseUtils.queryNumEntries(
+                database,
+                GameBoardContract.GameBoardEntry.TABLE_LINK_GAME_PLACE,
+                whereClauseIdRefPlace,
+                whereArgsIdRefPlace
+        );
+        if(returnReq >0){
+            /* the place already own this game */
+            Toast.makeText(this,getResources().getString(R.string.display_info_place_already_has_game_toast),Toast.LENGTH_LONG).show();
+        }else{
+            /* if not, add it*/
+            ContentValues cv = new ContentValues();
+            cv.put(GameBoardContract.GameBoardEntry.COLUMN_ID_PLACES_REF_LGP,idPlace);
+            cv.put(GameBoardContract.GameBoardEntry.COLUMN_ID_GAME_REF_LGP,idGame);
+            returnReq = database.insert(
+                    GameBoardContract.GameBoardEntry.TABLE_LINK_GAME_PLACE,
+                    null,
+                    cv
+            );
+            if(returnReq>0){
+                /* if we could add, tell the user*/
+                Toast.makeText(this,getResources().getString(R.string.display_info_place_added_toast),Toast.LENGTH_LONG).show();
+                textView.append("\n"+place);
+            }else{
+                /* otherwise tell him too */
+                Toast.makeText(this,getResources().getString(R.string.display_info_error_place_added_toast),Toast.LENGTH_LONG).show();
+            }
+        }
+
     }
 }

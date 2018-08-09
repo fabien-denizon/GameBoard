@@ -68,7 +68,7 @@
                 android:value=".MainActivity"/>
         </activity>
 
-        <activity android:name=".deleteGameActivity"
+        <activity android:name=".DeleteGameActivity"
             android:label="@string/delete_game_title">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SearchGameActivity"/>

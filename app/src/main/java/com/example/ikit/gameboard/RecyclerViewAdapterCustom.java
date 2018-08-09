@@ -10,13 +10,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class recyclerViewAdapterCustom extends RecyclerView.Adapter<recyclerViewAdapterCustom.ViewHolder>{
+public class RecyclerViewAdapterCustom extends RecyclerView.Adapter<RecyclerViewAdapterCustom.ViewHolder>{
     private ArrayList<String> listItem;
     private LayoutInflater layoutInflater;
     private ItemClickListener itemClickListener;
 
 
-    public recyclerViewAdapterCustom(Context c, ArrayList<String> list){
+    public RecyclerViewAdapterCustom(Context c, ArrayList<String> list){
         layoutInflater = LayoutInflater.from(c);
         listItem = list;
     }
@@ -24,13 +24,13 @@ public class recyclerViewAdapterCustom extends RecyclerView.Adapter<recyclerView
 
     @NonNull
     @Override
-    public recyclerViewAdapterCustom.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerViewAdapterCustom.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.list_game_recycler_view, parent, false);
-        return new recyclerViewAdapterCustom.ViewHolder(view);
+        return new RecyclerViewAdapterCustom.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull recyclerViewAdapterCustom.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewAdapterCustom.ViewHolder holder, int position) {
         String gameName = listItem.get(position);
         holder.textView.setText(gameName);
     }
