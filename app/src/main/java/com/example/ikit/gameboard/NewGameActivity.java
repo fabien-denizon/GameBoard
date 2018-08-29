@@ -41,27 +41,29 @@ public class NewGameActivity extends AppCompatActivity{
         listPlaces = listPlacesDataBase(db);
 
         /* populate the spinner with this list*/
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listPlaces);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.custom_spinner_layout, listPlaces);
+        arrayAdapter.setDropDownViewResource(R.layout.custom_spinner_layout);
         spinner.setAdapter(arrayAdapter);
 
             //nb player
         Spinner nbPlayerSpinner = findViewById(R.id.new_game_nb_player_spinner);
-        ArrayAdapter<CharSequence> adapterNbPlayer = ArrayAdapter.createFromResource(this, R.array.new_game_nb_player_populate_spinner, android.R.layout.simple_spinner_item);
-        adapterNbPlayer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapterNbPlayer = ArrayAdapter.createFromResource(this, R.array.new_game_nb_player_populate_spinner, R.layout.custom_spinner_layout);
+        adapterNbPlayer.setDropDownViewResource(R.layout.custom_spinner_layout);
         nbPlayerSpinner.setAdapter(adapterNbPlayer);
 
             //duration
         Spinner durationSpinner = findViewById(R.id.new_game_duration_spinner);
-        ArrayAdapter<CharSequence> adapterDuration = ArrayAdapter.createFromResource(this, R.array.new_game_duration_populate_spinner, android.R.layout.simple_spinner_item);
-        adapterDuration.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapterDuration = ArrayAdapter.createFromResource(this, R.array.new_game_duration_populate_spinner, R.layout.custom_spinner_layout);
+
+        adapterDuration.setDropDownViewResource(R.layout.custom_spinner_layout);
+
         durationSpinner.setAdapter(adapterDuration);
 
             //game type
         Spinner typeSpinner = findViewById(R.id.new_game_type_spinner);
         listGameType = listGameType(db);
-        ArrayAdapter<String> adapterGameType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listGameType);
-        adapterGameType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapterGameType = new ArrayAdapter<>(this, R.layout.custom_spinner_layout, listGameType);
+        adapterGameType.setDropDownViewResource(R.layout.custom_spinner_layout);
         typeSpinner.setAdapter(adapterGameType);
         /* set up listener on the edit text to erase the content when first click*/
             //comment

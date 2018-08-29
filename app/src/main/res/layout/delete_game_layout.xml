@@ -12,13 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/buttonStyle"
             android:id="@+id/delete_game_yes_button"
             android:text="@string/delete_game_yes_delete_button"/>
         <Button
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/buttonStyle"
             android:id="@+id/delete_game_no_button"
             android:text="@string/delete_game_no_delete_button"/>
     </LinearLayout>

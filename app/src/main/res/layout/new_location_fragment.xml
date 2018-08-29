@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/submit_new_location_button"
+        style="@style/buttonStyle"
         android:text="@string/submit_new_location_button"/>
 
 </LinearLayout>

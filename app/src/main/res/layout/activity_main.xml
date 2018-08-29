@@ -9,24 +9,24 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/main_search_game"
-        android:text="@string/search_game" />
+        android:text="@string/search_game"
+        style="@style/textViewMenu"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/new_game"
-        android:id="@+id/main_new_game"/>
+        android:id="@+id/main_new_game"
+        style="@style/textViewMenu"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/new_location"
-        android:id="@+id/main_new_location"/>
+        android:id="@+id/main_new_location"
+        style="@style/textViewMenu"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/import_export_database"
-        android:id="@+id/main_import_export_database"/>
+        android:id="@+id/main_import_export_database"
+        style="@style/textViewMenu"/>
 
 
 </LinearLayout>

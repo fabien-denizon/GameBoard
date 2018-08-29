@@ -6,6 +6,39 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:buttonStyle">@style/buttonStyle</item>
+    </style>
+
+    <style name="textViewMenu">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textColor">@color/colorBlank</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/rounded_corner</item>
+    </style>
+
+    <style name="buttonStyle">
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:background">@drawable/button_style</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="recyclerView">
+        <item name="android:background">@drawable/recycler_view_background</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="customSpinner">
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
     </style>
 
 </resources>
