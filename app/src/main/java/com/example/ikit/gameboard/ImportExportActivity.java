@@ -1,10 +1,12 @@
 package com.example.ikit.gameboard;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -54,12 +56,14 @@ public class ImportExportActivity extends AppCompatActivity {
                 exportDataBase(database);
             }
         });
+
+        TextView textView = findViewById(R.id.export_database_text_view);
+        textView.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public void importDataBase(SQLiteDatabase db) throws IOException {
 
         FileInputStream fis = null;
-        TextView textView = findViewById(R.id.export_database_text_view);
         try {
             fis = getApplicationContext().openFileInput(NAME_FILE_DATABASE_SAVED);
         } catch (FileNotFoundException e) {
@@ -150,14 +154,12 @@ public class ImportExportActivity extends AppCompatActivity {
         String tableName="";
         int indexListData;
         int typeOfString = 1; //1 -> table / 2 -> columns / 3 -> data
-        TextView textView = findViewById(R.id.export_database_text_view);
+        ContentValues cv = new ContentValues();
 
-        textView.append("\n--- addInDataBase ---");
-        for(int i = 0; i<data.size()-1;i++){
+        for(int i = 0; i<data.size();i++){
             switch (typeOfString){
                 case 1:
                     /* it is the table name */
-                    textView.append("\nTABLE NAME\n "+data.get(i));
                     tableName = data.get(i).toString();
                     typeOfString++;
                     break;
@@ -165,13 +167,11 @@ public class ImportExportActivity extends AppCompatActivity {
                     /*it is a column name */
                     if(firstTimeColumn){
                         listColumn.clear();
-                        textView.append("\nCOLUMN");
                         firstTimeColumn=false;
                         sizeTable = 0;
                     }
                     listColumn.add(data.get(i).toString());
                     sizeTable++;
-                    textView.append("\n"+data.get(i));
                     /* if there is a # in the next array we will have data to insert */
                     if(data.get(i+1).toString().indexOf("#")>0){
                         typeOfString++;
@@ -179,22 +179,22 @@ public class ImportExportActivity extends AppCompatActivity {
                     break;
                 case 3:
                     if(firstTimeData){
-                        textView.append("\nDATA");
                         firstTimeData=false;
                     }
                     listData.clear();
                     listData.addAll(Arrays.asList(data.get(i).toString().split("#")));
                     for(indexListData = 0; indexListData<listData.size();indexListData++){
-                        /* each time indexListData % sizeTable == 0, we have a new row */
-                        if(indexListData%sizeTable == 0){
-                            textView.append("\n");
+                        cv.put(listColumn.get(indexListData%listColumn.size()).toString(),listData.get(indexListData).toString());
+
+                        /* each time indexListData+1 % sizeTable == 0, we have a new row */
+                        if((indexListData+1)%sizeTable == 0){
+                            db.insert(tableName,null,cv);
+                            cv.clear();
                         }
-                        textView.append("*"+listData.get(indexListData).toString());
                     }
                     break;
             }
         }
-
         return success;
     }
 
