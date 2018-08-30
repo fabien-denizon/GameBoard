@@ -247,7 +247,7 @@ public class DisplayGameInfo extends AppCompatActivity {
         do{
             listPlaces.add(cursor.getString(cursor.getColumnIndex(GameBoardContract.GameBoardEntry.COLUMN_NAME_PLACES)));
         }while (cursor.moveToNext());
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listPlaces);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.custom_spinner_layout, listPlaces);
         spinnerNewPlace.setAdapter(adapter);
     }
 
@@ -264,7 +264,7 @@ public class DisplayGameInfo extends AppCompatActivity {
                 arrayList.add(strings[i]);
             }
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.custom_spinner_layout,arrayList);
         Spinner spinner= findViewById(R.id.display_game_info_duration_spinner);
         spinner.setAdapter(arrayAdapter);
     }
@@ -280,7 +280,7 @@ public class DisplayGameInfo extends AppCompatActivity {
                 arrayList.add(listType.get(i));
             }
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.custom_spinner_layout,arrayList);
         Spinner spinner= findViewById(R.id.display_game_info_game_type_spinner);
         spinner.setAdapter(arrayAdapter);
     }
@@ -375,7 +375,7 @@ public class DisplayGameInfo extends AppCompatActivity {
                 arrayList.add(strings[i]);
             }
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.custom_spinner_layout,arrayList);
         Spinner spinner= findViewById(R.id.display_game_info_nb_player_spinner);
         spinner.setAdapter(arrayAdapter);
     }

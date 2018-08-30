@@ -202,8 +202,6 @@ public class ResultSearchGameActivity extends AppCompatActivity implements Recyc
                     recyclerViewAdapter = new RecyclerViewAdapterCustom(this, listGameName);
                     recyclerViewAdapter.setClickListener(this);
                     recyclerView.setAdapter(recyclerViewAdapter);
-                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL);
-                    recyclerView.addItemDecoration(dividerItemDecoration);
                 }else{
                     textViewInformation.append("\n"+getResources().getString(R.string.search_game_no_result_with_other_type));
                 }

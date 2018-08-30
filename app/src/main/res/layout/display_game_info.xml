@@ -118,24 +118,28 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/display_game_info_modify_button"
-            android:text="@string/display_info_modify_data_button"/>
+            android:text="@string/display_info_modify_data_button"
+            style="@style/buttonStyle"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/display_game_info_add_place"
-            android:text="@string/display_info_add_place_button"/>
+            android:text="@string/display_info_add_place_button"
+            style="@style/buttonStyle"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/display_game_info_delete_button"
-            android:text="@string/display_info_delete_button"/>
+            android:text="@string/display_info_delete_button"
+            style="@style/buttonStyle"/>
 
     </LinearLayout>
 
